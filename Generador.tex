@@ -2,10 +2,22 @@
 \usepackage[spanish,es-tabla]{babel}
 \usepackage[utf8]{inputenc}
 \usepackage{parskip}
+\usepackage{graphicx} 
+
+\usepackage[left=1.5cm, right=2.5cm, top=2.5cm, bottom=2.5cm]{geometry}
+\usepackage[none]{hyphenat} 
+\usepackage{booktabs}  % Líneas profesionales
+\usepackage{adjustbox}
+\usepackage{colortbl}
+\usepackage{xcolor}
+\usepackage{hyperref}
+
+
 
 %opening
 \title{Sistema Fotovoltaico Conectado a la Red }
-\author{Iván Úrsula López}
+\author{-----}
+\date{}
 
 \begin{document}
 
@@ -20,10 +32,89 @@
 
 \section{Introducción}
 
+El proyecto a diseñar consta de una instalación conectada a la red situada a en la localidad de Ontígola, provincia de Toledo, con una altitud de 40,01068 y longitud de -3,58621.
 
 
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=1\linewidth]{../Captura}
+	\caption{Tamaño y orientación del terreno}
+	\label{fig:localidad}
+\end{figure}
+
+Como se observa en la \autoref{fig:localidad} el terreno elegido para el generador fotovoltaico consta de unos \textit{2000}$m^2$ en forma de rectángulo, donde su lado menor esta orientada al Sur-Oeste como se muestra en la figura. Por esta orientación se descarto un generador con seguidor solar N-S, debido a que los seguidores comerciales son más largo que el ancho del terreno, por lo que el generador se diseñara con estructuras estáticas maximizando su producción para la venta de energía.
+
+Las lineas de los paneles solares se instalaran orientadas al Sur, por la disposición del terreno algunas líneas serán más cortas que otras.
+\newpage
 \section{Análisis de la irradiación }
+Para la simulación del generador fotovoltaico se usara la herramientas online sisifo donde se simulará los parámetros necesarios.
+
+Con una primera simulación se obtiene la irradiación en la localidad  seleccionado para el generador, se pondrá la latitud y longitud como se observa en la \autoref{fig:sisifolocalidad}
+
+\begin{figure}[h!]
+	\centering
+	\includegraphics[width=0.9\linewidth]{../Sisifo_localidad}
+	\caption{Configuración coordenadas.}
+	\label{fig:sisifolocalidad}
+\end{figure}
+Obtenemos el año meteorológico típico en el apartado de \textit{meteo}, de esta forma sisifo tiene todo los datos del clima típico en la localidad a lo largo del año, de donde se basara la simulación.
+\subsection{Irradiación horizontal }
+Una vez configurado las coordenadas se puede simular la irradiación horizontal.
+\begin{table}[h]
+	\centering
+
+	\caption{Irradiación horizontal mensual}
+	\label{tab:horizontal_t}
+	\small  % Reduce el tamaño de fuente
+	\begin{tabular}{lcccccccccccc}
+		\toprule
+		\textbf{Irradiación} & \textbf{Ene} & \textbf{Feb} & \textbf{Mar} & \textbf{Abr} & \textbf{May} & \textbf{Jun} & \textbf{Jul} & \textbf{Ago} & \textbf{Sep} & \textbf{Oct} & \textbf{Nov} & \textbf{Dic} \\
+		\midrule
+		\textit{BO} (kWh/m²)  & 4,19 & 5,65 & 7,64 & 9,63 & 10,99 & 11,61 & 11,30 & 10,16 & 8,42 & 6,41 & 4,62 & 3,80 \\
+		\textit{G0} (kWh/m²)& 2,05 & 2,83 & 3,98 & 5,19 & 6,76 & 7,12 & 8,19 & 7,16 & 5,49 & 3,47 & 2,50 & 2,26 \\
+		\textit{B0} (kWh/m²)  & 1,07 & 1,55 & 2,25 & 2,81 & 4,39 & 4,58 & 6,32 & 5,35 & 3,73 & 1,96 & 1,56 & 1,59 \\
+		\textit{D0} (kWh/m²) & 0,98 & 1,28 & 1,73 & 2,38 & 2,36 & 2,54 & 1,87 & 1,81 & 1,77 & 1,51 & 0,94 & 0,67 \\
+		\textit{KT} & 2,04 & 2,00 & 1,92 & 1,86 & 1,63 & 1,63 & 1,38 & 1,42 & 1,53 & 1,85 & 1,85 & 1,68 \\
+		\bottomrule
+	\end{tabular}
+
+\end{table}
+
+Como se observa en la \autoref{tab:horizontal_t} la irradiación extraterrestre es mayor en todo el año a la global debido a que no sufre atenuaciones por atravesar la atmósfera.
+
+También cabe destacar que la irradiación difusa y directa en los meses de enero y febrero es muy parecida, mientras que a lo largo de los meses la directa va obteniendo mas irradiación que la indirecta hasta llegar a los meses de verano donde la distancia es mayor, esto es debido a la altura del Sol en los diferentes meses. En los meses de invierno el Sol esta mas bajo, por consecuencia la difusa aumenta mientras que la directa disminuye a no estar tan en perpendicular con el panel solar. En los meses de verano sucede al contrario, el Sol esta más alto por lo que la directa aumenta su irradiación mientras que la indirecta disminuye.
+
+\subsubsection{Irradiación directa}
+
+\begin{table}[h]
+	\caption{Irradiación directa mensual con $\beta=30º$}
+	\label{tab:directa}
+	\scriptsize
+	\setlength{\tabcolsep}{5pt}
+	\begin{tabular}{l*{12}{c}}
+		\toprule
+		\textbf{Irradiación} & \textbf{Ene} & \textbf{Feb} & \textbf{Mar} & \textbf{Abr} & \textbf{May} & \textbf{Jun} & \textbf{Jul} & \textbf{Ago} & \textbf{Sep} & \textbf{Oct} & \textbf{Nov} & \textbf{Dic} \\
+		\midrule
+		G(0) (kWh/m2)& 2,05 & 2,83 & 3,98 & 5,19 & 6,76 & 7,12 & 8,19 & 7,16 & 5,49 & 3,47 & 2,5 & 2,26 \\
+		
+		G($\beta$) (kWh/m2) & 4,03 & 6,31 & 6,29 & 6,95 & 7,69 & 7,95 & 8,96 & 8,26 & 7,15 & 5,55 & 4,82 & 4,33 \\
+		Ganancia & 49,13 \% & 55,15 \% & 36,72 \% & 25,32 \% & 12,09 \% & 10,44 \% & 8,59 \% & 13,32 \% & 23,22 \% & 37,48 \% & 48,13 \% & 47,81 \% \\
+		
+		B(0) (kWh/m2) & 1,07 & 1,55 & 2,25 & 2,81 & 4,39 & 4,58 & 6,32 & 5,35 & 3,73 & 1,96 & 1,56 & 1,59 \\
+	
+		B($\beta$) (kWh/m2)& 2,62 & 4,55 & 3,86 & 3,98 & 4,65 & 4,53 & 6,08 & 5,54 & 4,68 & 3,25 & 3,27 & 2,93 \\
+		
+		Ganancia & 59,16 \% & 65,93 \% & 41,71 \% & 29,40 \% & 5,59 \% & -1,10 \% & -3,95 \% & 3,43 \% & 20,30 \% & 39,69 \% & 52,29 \% & 45,73 \% \\
+	
+		D(0) (kWh/m2) & 0,98 & 1,28 & 1,73 & 2,38 & 2,36 & 2,54 & 1,87 & 1,81 & 1,77 & 1,51 & 0,94 & 0,67 \\
+	
+		D($\beta$) (kWh/m2) & 1,04 & 1,18 & 1,79 & 2,18 & 2,11 & 2,4 & 1,78 & 1,79 & 1,73 & 1,74 & 1,1 & 1,01 \\
+		
+		Ganancia & 5,77 \% & -8,47 \% & 3,35 \% & -9,17 \% & -11,85 \% & -5,83 \% & -5,06 \% & -1,12 \% & -2,31 \% & 13,22 \% & 14,55 \% & 33,66 \% \\
+		\bottomrule
+	\end{tabular}
+\end{table}
+
 
 \section{Diseño del generado fotovoltaico}
-
 \end{document}
