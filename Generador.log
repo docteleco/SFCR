@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.29 (MiKTeX 26.5) (preloaded format=pdflatex 2026.5.21)  22 MAY 2026 01:51
+This is pdfTeX, Version 3.141592653-2.6-1.40.29 (MiKTeX 26.5) (preloaded format=pdflatex 2026.5.21)  22 MAY 2026 01:56
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -509,26 +509,19 @@ LaTeX Info: Redefining \% on input line 1.
  (Generador.lot
 LaTeX Info: Redefining \. on input line 1.
 LaTeX Info: Redefining \% on input line 1.
-
-
-LaTeX Warning: Command \textordmasculine invalid in math mode on input line 3.
-
-
-LaTeX Warning: Command \textordmasculine invalid in math mode on input line 3.
-
-Missing character: There is no º in font cmr12!
 )
 \tf@lot=\write6
 \openout6 = `Generador.lot'.
 
  [2]
-<../Captura.png, id=52, 1444.64719pt x 602.25pt>
+<../Captura.png, id=53, 1444.64719pt x 602.25pt>
 File: ../Captura.png Graphic file (type png)
 <use ../Captura.png>
 Package pdftex.def Info: ../Captura.png  used on input line 40.
 (pdftex.def)             Requested size: 500.484pt x 208.64029pt.
- [3 <../Captura.png>]
-<../Sisifo_localidad.png, id=63, 1040.38687pt x 359.09157pt>
+
+[3 <../Captura.png>]
+<../Sisifo_localidad.png, id=64, 1040.38687pt x 359.09157pt>
 File: ../Sisifo_localidad.png Graphic file (type png)
 <use ../Sisifo_localidad.png>
 Package pdftex.def Info: ../Sisifo_localidad.png  used on input line 56.
@@ -536,15 +529,6 @@ Package pdftex.def Info: ../Sisifo_localidad.png  used on input line 56.
 LaTeX Font Info:    External font `cmex10' loaded for size
 (Font)              <10.95> on input line 69.
  [4 <../Sisifo_localidad.png>]
-
-LaTeX Warning: Command \textordmasculine invalid in math mode on input line 90.
-
-
-
-LaTeX Warning: Command \textordmasculine invalid in math mode on input line 90.
-
-
-Missing character: There is no º in font cmr12!
 LaTeX Font Info:    External font `cmex10' loaded for size
 (Font)              <5> on input line 94.
 
@@ -565,29 +549,30 @@ Package rerunfilecheck Info: File `Generador.out' has not changed.
  ) 
 Here is how much of TeX's memory you used:
  12419 strings out of 467690
- 200904 string characters out of 5415450
- 650955 words of memory out of 5000000
+ 200905 string characters out of 5415450
+ 650958 words of memory out of 5000000
  41288 multiletter control sequences out of 15000+600000
- 635793 words of font info for 66 fonts, out of 8000000 for 9000
+ 635833 words of font info for 66 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  69i,11n,79p,682b,464s stack positions out of 10000i,1000n,20000p,200000b,200000s
  <C:\Users\ivan\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\tcrm1
-095.pk><C:/Users/ivan/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts
-/cm/cmbx10.pfb><C:/Users/ivan/AppData/Local/Programs/MiKTeX/fonts/type1/public/
-amsfonts/cm/cmbx12.pfb><C:/Users/ivan/AppData/Local/Programs/MiKTeX/fonts/type1
-/public/amsfonts/cm/cmbx8.pfb><C:/Users/ivan/AppData/Local/Programs/MiKTeX/font
-s/type1/public/amsfonts/cm/cmmi12.pfb><C:/Users/ivan/AppData/Local/Programs/MiK
-TeX/fonts/type1/public/amsfonts/cm/cmmi8.pfb><C:/Users/ivan/AppData/Local/Progr
-ams/MiKTeX/fonts/type1/public/amsfonts/cm/cmr10.pfb><C:/Users/ivan/AppData/Loca
-l/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr12.pfb><C:/Users/ivan/AppDa
-ta/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr17.pfb><C:/Users/iva
-n/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr8.pfb><C:/Use
-rs/ivan/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmti10.pfb
-><C:/Users/ivan/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cm
-ti12.pfb>
-Output written on Generador.pdf (5 pages, 3675015 bytes).
+095.pk> <C:\Users\ivan\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\
+tcti1200.pk><C:/Users/ivan/AppData/Local/Programs/MiKTeX/fonts/type1/public/ams
+fonts/cm/cmbx10.pfb><C:/Users/ivan/AppData/Local/Programs/MiKTeX/fonts/type1/pu
+blic/amsfonts/cm/cmbx12.pfb><C:/Users/ivan/AppData/Local/Programs/MiKTeX/fonts/
+type1/public/amsfonts/cm/cmbx8.pfb><C:/Users/ivan/AppData/Local/Programs/MiKTeX
+/fonts/type1/public/amsfonts/cm/cmmi12.pfb><C:/Users/ivan/AppData/Local/Program
+s/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi8.pfb><C:/Users/ivan/AppData/Local/
+Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr10.pfb><C:/Users/ivan/AppData
+/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr12.pfb><C:/Users/ivan/
+AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr17.pfb><C:/User
+s/ivan/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr8.pfb><C
+:/Users/ivan/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmti1
+0.pfb><C:/Users/ivan/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/
+cm/cmti12.pfb>
+Output written on Generador.pdf (5 pages, 3675823 bytes).
 PDF statistics:
- 135 PDF objects out of 1000 (max. 8388607)
+ 140 PDF objects out of 1000 (max. 8388607)
  18 named destinations out of 1000 (max. 500000)
  51 words of extra memory for PDF output out of 10000 (max. 10000000)
 
