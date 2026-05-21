@@ -1,0 +1,4 @@
+\babel@toc {spanish}{}\relax 
+\contentsline {section}{\numberline {1}Introducción}{3}{}%
+\contentsline {section}{\numberline {2}Análisis de la irradiación }{3}{}%
+\contentsline {section}{\numberline {3}Diseño del generado fotovoltaico}{3}{}%
