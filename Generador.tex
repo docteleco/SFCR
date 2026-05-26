@@ -362,7 +362,7 @@ Donde los datos quedan recogidos en la \autoref{tab:conf_gen}.
 	\end{tabular}
 \end{table}
 
-\subsection{Trasformador.}
+\subsection{Elección del trasformador.}
 Teniendo en cuenta que la instalación del generador fotovoltaica tiene una potencia pico superior a $50KW_p$ se requiere el uso de un transformador para la conexión de la red eléctrica y por lo consiguiente hay que tener en cuenta las perdidas del trasformador en la simulación.
 
 El trasformador elegido es el \textit{TTUW315}, con potencia de  315kVA, perteneciente a la empresa \textit{Polylux}. El trasformador cuenta con una eficiencia del 96\%.
@@ -427,8 +427,9 @@ Una parte de la energía se pierdes por diferentes razones, debido ha esto es im
 	\caption{Perdidas de energía }
 	\label{fig:energiaperdida}
 \end{figure}
+Como se observa en la \autoref{fig:energiaperdida} las perdidas más representativas son por suciedad(6.1\%) y el inversor(4\%). Las perdidas por sombreado son bajas debido a la elección de $L_{n-s}$ de 1.5 y al angulo de inclinación de 20º, el sombreado es la mayor perdida que puede tener un generador fotovoltaico, al minimizar esta perdida la energía útil aumenta considerablemente.
 
-
+\newpage
 \section{Rentabilidad del generador fotovoltaico.}
 
 Para obtener la inversión inicial del generador se estima un precio de $0.8€/W_p$ para la compra de materiales, personal y obra.
