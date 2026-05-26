@@ -11,8 +11,13 @@
 \usepackage{colortbl}
 \usepackage{xcolor}
 \usepackage{hyperref}
-
-
+\usepackage{eurosym}
+\usepackage{pgfplots}
+\usepackage{pgfplotstable}
+\pgfplotsset{compat=1.18}
+\usepackage{amsmath}
+\usepackage{siunitx}
+\usepackage{subcaption} 
 
 %opening
 \title{Sistema Fotovoltaico Conectado a la Red }
@@ -30,7 +35,7 @@
 \newpage
 
 
-\section{Introducción}
+\section{Introducción.}
 
 El proyecto a diseñar consta de una instalación conectada a la red situada a en la localidad de Ontígola, provincia de Toledo, con una altitud de 40,01068 y longitud de -3,58621.
 
@@ -58,7 +63,7 @@ Con una primera simulación se obtiene la irradiación en la localidad  seleccio
 	\label{fig:sisifolocalidad}
 \end{figure}
 Obtenemos el año meteorológico típico en el apartado de \textit{meteo}, de esta forma sisifo tiene todo los datos del clima típico en la localidad a lo largo del año, de donde se basara la simulación.
-\subsection{Irradiación horizontal }
+\subsection{Irradiación horizontal. }
 Una vez configurado las coordenadas se puede simular la irradiación horizontal.
 \begin{table}[h]
 	\centering
@@ -84,9 +89,10 @@ Como se observa en la \autoref{tab:horizontal_t} la irradiación extraterrestre 
 
 También cabe destacar que la irradiación difusa y directa en los meses de enero y febrero es muy parecida, mientras que a lo largo de los meses la directa va obteniendo mas irradiación que la indirecta hasta llegar a los meses de verano donde la distancia es mayor, esto es debido a la altura del Sol en los diferentes meses. En los meses de invierno el Sol esta mas bajo, por consecuencia la difusa aumenta mientras que la directa disminuye a no estar tan en perpendicular con el panel solar. En los meses de verano sucede al contrario, el Sol esta más alto por lo que la directa aumenta su irradiación mientras que la indirecta disminuye.
 
-\subsubsection{Irradiación directa}
-
+\subsection{Irradiación directa.}
+Una vez estudiado la irradiación horizontal, se procederá a simular la irradiación con estructura. Para una primera aproximación se usara un angulo de 30º, siguiendo la norma de diseño de altitud - 10º. De esta forma se puede observar la ganancia de la irradiación captada por los paneles solares respecto a la horizontal.
 \begin{table}[h]
+	\centering
 	\caption{Irradiación directa mensual con $\beta=30$\textit{º}}
 	\label{tab:directa}
 	\scriptsize
@@ -116,5 +122,341 @@ También cabe destacar que la irradiación difusa y directa en los meses de ener
 \end{table}
 
 
-\section{Diseño del generado fotovoltaico}
+\begin{figure}[h]
+\centering
+	\begin{tikzpicture}
+	\begin{axis}[
+		width=14cm,
+		height=8cm,
+		xlabel={Mes},
+		ylabel={Ganancia (\%)},
+		ymin=-20,
+		ymax=80,
+		xtick={1,2,3,4,5,6,7,8,9,10,11,12},
+		xticklabels={Ene, Feb, Mar, Abr, May, Jun, Jul, Ago, Sep, Oct, Nov, Dic},
+		legend pos=north east,
+		legend style={font=\small},
+		grid=both,
+		grid style={line width=.1pt, draw=gray!30},
+		major grid style={line width=.2pt,draw=gray!50},
+		x tick label style={rotate=45, anchor=east},
+		y tick label style={/pgf/number format/.cd, fixed, fixed zerofill, precision=1, /tikz/.cd},
+		table/col sep=space,
+		]
+		\addplot+[mark=*, thick, blue] coordinates {
+			(1,49.13) (2,55.15) (3,36.72) (4,25.32) (5,12.09) (6,10.44)
+			(7,8.59) (8,13.32) (9,23.22) (10,37.48) (11,48.13) (12,47.81)
+		};
+		\addlegendentry{G($\beta$) vs G(0)};
+		
+		\addplot+[mark=square*, thick, red] coordinates {
+			(1,59.16) (2,65.93) (3,41.71) (4,29.40) (5,5.59) (6,-1.10)
+			(7,-3.95) (8,3.43) (9,20.30) (10,39.69) (11,52.29) (12,45.73)
+		};
+		\addlegendentry{B($\beta$) vs B(0)};
+		
+		\addplot+[mark=triangle*, thick, green] coordinates {
+			(1,5.77) (2,-8.47) (3,3.35) (4,-9.17) (5,-11.85) (6,-5.83)
+			(7,-5.06) (8,-1.12) (9,-2.31) (10,13.22) (11,14.55) (12,33.66)
+		};
+		\addlegendentry{D($\beta$) vs D(0)};
+		
+	\end{axis}
+
+	\end{tikzpicture}
+	\caption{Ganancia de irradiación}
+	\label{fig:grafica_ganancia}
+\end{figure}
+
+
+\section{Diseño del generador fotovoltaico.}
+\subsection{Elección del angulo de inclinación.}
+Para la elección del angulo de inclinación usaremos la herramienta que no proporciona sisifo para hacer varias simulaciones a la vez variando un parámetro. De esta forma se podrá observar como afecta el angulo de inclinación al generador fotovoltaico.
+
+
+\begin{figure}[h]
+	\centering
+	
+	\begin{subfigure}[b]{0.45\textwidth}	
+		\includegraphics[width=1\linewidth]{"../produccion_energetica"}
+		\caption{Ganancias por inclinación}
+		\label{fig:ganancia_inclinacion}
+	\end{subfigure}
+	\hfil
+	\begin{subfigure}[b]{0.45\textwidth}
+		\centering
+		\includegraphics[width=1\linewidth]{"../perdidas"}
+		\caption{Perdidas por inclinación}
+		\label{fig:perdida_inclinacion}
+	\end{subfigure}
+	\caption{Repuesta del angulo de inclinación a la producción}
+	\label{fig:reespueta_inclinacion}
+	
+\end{figure}
+
+
+Como se observa en la \autoref{fig:ganancia_inclinacion} hay una mejoría en la obtención de la energía hasta un máximo de 20º, después de al aumentar la inclinación las perdidas van en aumento como se puede observar en la \autoref{fig:perdida_inclinacion}.
+
+Debido a los resultados de la simulación se elige una estructura con inclinación de 20º para maximizar la producción de energía.
+
+
+\subsection{Elección del parámetro $L_{n-s}$.}
+La distancia entre los módulos fotovoltaicos repercute directamente a las perdidas por sombreado. Cuando mayor sea este parámetro menos sombra darán las filas delanteras de los módulos a las traseras, pero se necesitaran mas espació para poner el mismo numero de paneles.
+
+Como se hizo anteriormente con el angulo de inclinación se realiza una simulación con parámetros variables, en este caso $L_{n-s}$.
+
+\begin{figure}[h]
+	
+	\begin{subfigure}[b]{0.5\textwidth}
+		\centering
+		\includegraphics[width=0.7\linewidth]{../lns_ganancias}
+		\caption{Ganancias por $L_{n-s}$}
+		\label{fig:lnsganancias}
+	\end{subfigure}
+	\hfil
+	\begin{subfigure}[b]{0.5\textwidth}
+		\centering
+		\includegraphics[width=0.7\linewidth]{../lns_perdidas}
+		\caption{Perdidas por $L_{n-s}$  }
+		\label{fig:lnsperdidas}
+	\end{subfigure}
+	
+	\caption{Respuesta del $L_{n-s}$ a la producción}
+	\label{fig:respuesta_lns}
+\end{figure}
+
+Como se observa \autoref{fig:lnsganancias} hay un ligero incremento en la ganancia cuando mayor es la distancia entre las filas pero donde más afecta la distancia es en las perdidas donde se observa en la \autoref{fig:lnsperdidas} una mejoría en las perdidas en referencia a la distancia de las filas.
+
+Debido a que se quiere maximizar la producción se decide por un $L_{n-s}$ de 1.5 para reducir lo máximo posible las perdidas por sombreado.
+Teniendo en cuenta
+
+\subsection{Calculo del generador fotovoltaico. }
+
+\subsubsection{Modulo fotovoltaico.}
+El modulo fotovoltaico empleado en el diseño del generador es un RSM132-8-700-715 cuya características vienen en la \autoref{tab:modulo_FV }. Este modulo cuenta con una elevada potencia pico y un factor de bifacialidad del 80\%, aumentando la producción al aprovechar la irradiación difusa.
+\begin{table}[h!]
+	\centering
+	\caption{Características del módulos solar.}
+	\label{tab:modulo_FV }
+\begin{tabular}{cc}
+	\hline
+	\multicolumn{2}{c}{RSM132-8-700-715} \\
+	\hline
+	$P^*  (W_p)$ & 715 \\
+	\hline
+	$V^*_{oc} (V)$ & 50,09 \\
+	\hline
+	$I^*_{sc}(A)$ & 18,1 \\
+	\hline
+	$V^*_{mpp}(V)$ & 42 \\
+	\hline
+	$I^*_{mpp}(A)$ & 17,05 \\
+	\hline
+	$\beta (\frac{\%}{^\circ{C}}$ )& -0,22 \\
+	\hline
+	$\gamma (\frac{\%}{^\circ{C}})$ & -0,24 \\
+	\hline
+	$Bifacialidad(\%)$&80\\
+	\hline
+	Ancho(mm)&1303\\
+	\hline
+	Largo(mm)&2384\\
+	\hline
+	$NMOT(^\circ C)$&43
+	
+\end{tabular}
+\end{table}
+
+
+\subsubsection{Calculo de la potencia pico del generador}
+
+Para calcular la potencia del generador hay que obtener el numero máximo de módulos fotovoltaicos que entran en el terreno del generador.
+
+Para obtener el terreno ocupado por módulos se dividirá el área del terreno entre el $L_{ns}$
+
+\begin{equation}
+	A_{mod}=\frac{Area_{real}}{L_{n-s}}=\frac{2000m^2}{1.5}=1333m^2
+\end{equation}
+Una vez calculado el área cubierta por módulos se calcula el numero de módulos.
+El área del modulo se obtiene de la \autoref{tab:modulo_FV }.
+
+\begin{equation}
+	N_{mod}=\frac{A_{mod}}{Ancho\cdot Largo}=\frac{1333m^2}{1303mm\cdot 2384mm}\approx 428
+\end{equation}
+Una vez calculado el numero de módulos del generador se puede calcular la potencia pico del generador.
+
+\begin{equation}
+	P^*_{gen}=N_{mod}\cdot P^*_{mod}=428\cdot 715=306kW_p
+\end{equation}
+\subsubsection{Inversor y compatibilidad con el generador fotovoltaico}
+Un inversor adecuado para el generador fotovoltaico tiene que estar en el rango de $0.85 \cdot P^*_{gen}<P_{inv}<1.2 \cdot P^*_{gen}$, por facilidad en su búsqueda se seleccionara uno de 300kW debido a que son estándar en el mercado.
+
+
+Después de una búsqueda se opto por el inversor SUN2000-330KTL-H1 de la marca \textit{Huawei} en su versión de 300kVA cuyas características de entrada se muestran en la \autoref{tab:input_specs}
+
+\begin{table}[h]
+	\centering
+	\caption{Características de entrada del inversor.}
+	\label{tab:input_specs}
+	\begin{tabular}{l c}
+		\toprule
+		\textbf{Parámetro} & \textbf{Valor} \\
+		\midrule
+		Max. Input Voltage & 1,500 V \\
+		Number of MPP Trackers & 6 \\
+		Max. Current per MPPT & 65 A \\
+		Max. Short Circuit Current per MPPT & 115 A \\
+		Max. PV Inputs per MPPT & 4/5/5/4/5/5 \\
+		Start Voltage & 550 V \\
+		MPPT Operating Voltage Range & 500 V -- 1,500 V \\
+		Nominal Input Voltage & 1,080 V \\
+		\bottomrule
+	\end{tabular}
+\end{table}
+
+Para calculara el numero de módulos en serie se tiene que calcular la $V_{oc}$ máxima que se puede obtener en el año. Como la $V_{oc}$ depende de la temperatura de célula, se calculara suponiendo una temperatura mínima de celda anual de -10 grados.
+
+\begin{align}
+	V_{oc-max}(-10^\circ C)=V^*_{oc}\cdot[1+\beta(T_{c-min}-T_c^*)]\Longrightarrow 	\\
+	V_{oc-max}(-10^\circ C)=50.09\cdot[1-\frac{0.22}{100} (-10-25)]=53.95V
+\end{align}
+
+Una vez obtenida la $V_{oc-max}$ se puede calcular el numero de paneles solares conectados en serie.
+\begin{equation}
+	N_{s-min}=\frac{500V}{53.95V}=10
+\end{equation}
+
+\begin{equation}
+	N_{s-max}=\frac{1500V}{53.95}=27
+\end{equation}
+
+Por lo consiguiente el número de módulos en serie esta en el rango de $10<N_s<27$.
+
+Con la $I_{sc-max}$ se realiza el mismo procedimiento para obtener el numero de módulos en paralelo, suponiendo que $G_{max}=1.1\cdot G^*$ para tener un arco de seguridad por entrada de cada mppt.
+\begin{equation}
+	I_{sc-max}=I^*_{sc}\cdot \frac{G_{max}}{G^*}=18.1A\cdot 1.1=19.91A
+\end{equation}
+\begin{equation}
+	N_p=\frac{115A}{19.91A}=5
+\end{equation}
+Una vez obtenido el numero máximo de módulos en paralelo y en serie se procede a dimensionar de verdad el número de módulos, habiendo calculado con anterioridad que el número máximo de módulos fotovoltaico es de 428.
+
+Para este generador se opto por la siguiente configuración.
+\begin{equation}
+	P^*_{gen}=N_s\cdot N_p \cdot N_{mppt} \cdot P^*_{mod}= 21 \cdot 5 \cdot 4 \cdot 715W_p=300kW_p
+\end{equation}
+Donde los datos quedan recogidos en la \autoref{tab:conf_gen}.
+\begin{table}[h]
+	\centering
+	\caption{Características del generador fotovoltaico.}
+	\label{tab:conf_gen}
+	\begin{tabular}{l c}
+		\toprule
+		\textbf{Parámetro} & \textbf{Valor} \\
+		\midrule
+		Número serie & 21 \\
+		Número paralelo & 5 \\
+		Número de mppt &4 \\
+		$P^*_{gen}(kW_p)$ & 300 \\
+		\bottomrule
+	\end{tabular}
+\end{table}
+
+\subsection{Trasformador.}
+Teniendo en cuenta que la instalación del generador fotovoltaica tiene una potencia pico superior a $50KW_p$ se requiere el uso de un transformador para la conexión de la red eléctrica y por lo consiguiente hay que tener en cuenta las perdidas del trasformador en la simulación.
+
+El trasformador elegido es el \textit{TTUW315}, con potencia de  315kVA, perteneciente a la empresa \textit{Polylux}. El trasformador cuenta con una eficiencia del 96\%.
+\subsection{Simulación de perdidas del generador fotovoltaico.}
+Para tener una simulación más cercana a la realidad se eligió unas perdidas por cables del 1\% y unas perdidas por suciedad del 2\% en la cara superior y un 10\% en la cara inferior.
+
+Se introdujo los puntos de la curva del inversor para modelar sus perdidas en la simulación, así como las perdidas producidas por el trasformador.
+
+\section{Productividad del generador fotovoltaico.}
+
+Una vez diseñado el generador fotovoltaico se puede simular para obtener la productividad anual del generador y observar si el diseño es rentable.
+
+\subsection{Análisis de la producción. }
+\subsubsection{Ratio de rendimiento.}
+Para observar rápidamente si el generador se diseño eficientemente tiene que un PR superior del 80\%, por lo consiguiente si después de la simulación no se cumple se tiene que revisar el diseño del generador fotovoltaico.
+
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=0.7\linewidth]{../PR_generador}
+	\caption{Rendimiento global PR[\%]}
+	\label{fig:prgenerador}
+\end{figure}
+Como se muestra en la \autoref{fig:prgenerador} se obtiene un PR de 85.4 en la cara frontal y un 80.81 en la cara frontal más la trasera, teniendo en cuenta que la trasera tiene más perdidas por ser menos eficiente. Con este PR se puede decir que el generador es rentable.
+
+\subsubsection{Ganancia por bifacialidad.}
+Como se comento con anterioridad el panel al ser bifacial tiene una ganancia en la obtención de irradiación.
+Con este modulo en concreto la ganancia es de 7.67\% respecto a un mismo modulo sin bifacialidad.
+
+\subsubsection{Producción del generador fotovoltaico.}
+
+Una vez terminada la simulación podemos obtener la producción energética anual representada en la \autoref{tab:produccion_anual}.
+
+\begin{table}[h]
+	\centering
+	\caption{Producción anual}
+	\label{tab:produccion_anual}
+	\begin{tabular}{l c}
+		\toprule
+		Serie & Valor anual $[kWh/kW_p]$ \\
+		\midrule
+		CC (virtual, en el MPPT) & 1805,51 \\
+		CC & 1805,25 \\
+		CA & 1744,01 \\
+		\bottomrule
+	\end{tabular}
+\end{table}
+
+Teniendo en cuenta que la producción en España esta entre 1300$[kWh/kW_p]$ y 1800$[kWh/kW_p]$, se puede decir que la producción para los estándares de España están cercando el limite superior haciendo factible el uso del diseño para la venta de energia a posibles consumidores.
+
+Como tenemos el valor normalizado a la potencia pico, para obtener el valor total que se producirá hay que multiplicar la producción anual por la potencia del generador.
+
+\begin{equation}
+	E_{gen-anual}=P^*_{gen}\cdot E_{anual}=300kW_p\cdot 1744,01kWh/kW_p=523,2MWh
+\end{equation}
+
+\subsection{Análisis de perdidas.}
+Una parte de la energía se pierdes por diferentes razones, debido ha esto es imposible utilizar toda la energía, estando al rededor el 80\% la energía útil obtenida por el generador.
+
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=0.7\linewidth]{../energia_perdida}
+	\caption{Perdidas de energía }
+	\label{fig:energiaperdida}
+\end{figure}
+
+
+\section{Rentabilidad del generador fotovoltaico.}
+
+Para obtener la inversión inicial del generador se estima un precio de $0.8€/W_p$ para la compra de materiales, personal y obra.
+
+\begin{equation}
+	I_0= 300kW_p\cdot 0.8\text{€} /kW_p=240000\geneuro
+\end{equation}
+
+Para obtener la rentabilidad anual primero hay que ceñir un precio de venta del $kW_p$, se utilizara el precio del mercado regulado (PVPC) de unos $0.14\geneuro /kWh$.
+
+Una vez obtenido el precio del $kWh$ se puede calcular los beneficios anuales medio que dan el generador.
+
+\begin{equation}
+	B_{anual}=E_{gen-anual}\cdot P_{kWh}=523200kWh\cdot 0.14\geneuro /kWh=73220\geneuro
+\end{equation}
+Para el calculo de VAN se selecciona periodos de un año, con una vida útil típica de los generadores fotovoltaicos de 25 años, suponiendo un beneficio estable en cada año. Se supondrá un coste de oportunidad del d=10\%
+
+\begin{align}
+	VAN=-I_0+\sum_{i=1}^{i=25}\frac{B_{anual}}{(1+d)^i}\Longrightarrow\\
+	\Longrightarrow-240 000\geneuro +\sum_{i=1}^{i=25}\frac{73220\geneuro}{(1+0.1)^i}=386018.97\geneuro
+\end{align}
+
+
+Una vez calculador el VAN se puede calcular el TIR igualando el VAR=0, de este modo se calcula la tasa de retorno anual del proyecto.
+\begin{align}
+	0=-I_0+\sum_{i=1}^{i=25}\frac{B_{anual}}{(1+TIR)^i}\Longrightarrow \\
+	TIR=30\%
+\end{align}
+
+Como el TIR es mayor al coste de oportunidad que se uso en el calculo del VAN por lo consiguiente el proyecto tiene un gran retorno económico.
 \end{document}
